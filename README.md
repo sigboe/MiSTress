@@ -11,6 +11,8 @@ You will find the precompiled binary in the release section here on github.
 
 MiSTress runs on boot and checks the rss feed for news, this is really quick but not instant, after MiSTress has updated your wallpaper it will restart the menu core, which results in a small flicker one time each boot. This does not happen when you go from a core back to the menu core.
 
+Also if you use multiple wallpapers, you lose the ability to go to random wallpaper by pressing F1 on the keyboard. This feature I can add back in but it wasn't just a few lines.
+
 # Requirements
 
 1. Internet
@@ -24,7 +26,7 @@ MiSTress runs on boot and checks the rss feed for news, this is really quick but
 # Uninstallation
 
 1. Run mistress from the menu core, and say yes to remove the service
-2. Rename your wallpaper back from wallpaper.png to menu.png
+2. Rename your wallpaper back from wallpaper.png to menu.png, or if you use the wallpaper folder, just remove the menu.png
 
 
 # Compilation
@@ -42,8 +44,10 @@ pyinstaller --hidden-import=packaging.requirements --add-data="Roboto-Regular.tt
 
 Currently I don't have any short term plans to improve this programs, as I don't have time on my hands. But some of the things that I want to do if I get more spare time soon:
 
-- [] Improved handling of the current wallpaper wallaper file, so its easier to install and uninstall.
-- [] Improve the text handling, to fix edge cases where some text isn't formatted correctly when written on the picture
-- [] Add an optional options file, to override things like what RSS feed to fetch, how many posts, and maybe more
+- [ ] Improved handling of the current wallpaper wallaper file, so its easier to install and uninstall.
+- [ ] Improve the text handling, to fix edge cases where some text isn't formatted correctly when written on the picture
+- [ ] Add an optional options file, to override things like what RSS feed to fetch, how many posts, and maybe more
+- [ ] Better handling of multiple wallpapers (random wallpaper feature)
+- [ ] supporr for alternate config wallpapers, and folders for random wallpapers for alternate configs.
 
 I don't remember everything, but there is more that I wanted to do

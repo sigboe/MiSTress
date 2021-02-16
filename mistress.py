@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import feedparser, sys, os, argparse, locale, ssl, textwrap, time
+import feedparser, sys, os, argparse, locale, ssl, textwrap, time, random
 from subprocess import run, PIPE
 from PIL import Image, ImageFont, ImageDraw
 from dialog import Dialog
@@ -27,8 +27,13 @@ args = parser.parse_args()
 # Setup the rss feed
 rss = feedparser.parse('https://misterfpga.org/feed.php?t=147')
 feed = ''
+# Pick image random png from /media/fat/wallpapers if present, if not pick /media/fat/wallpaper.png
+if os.path.isdir('/media/fat/wallpapers'):
+    wallpapers = [os.path.join('/media/fat/wallpapers', _) for _ in os.listdir('/media/fat/wallpapers') if _.endswith(r".png")]
+    image = Image.open(random.choice(wallpapers)).convert('RGB')
+else:
+    image = Image.open('/media/fat/wallpaper.png').convert('RGB')
 # Settup pillow for drawing
-image = Image.open('/media/fat/wallpaper.png').convert('RGB')
 draw = ImageDraw.Draw(image)
 font = ImageFont.truetype('./Roboto-Regular.ttf', 23)
 color = "black"
