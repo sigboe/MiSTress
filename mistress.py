@@ -37,6 +37,9 @@ shadowcolor = "white"
 # init system
 inittab = '/etc/inittab'
 initline = '::sysinit:/media/fat/Scripts/mistress -u'
+# mister api
+mistercmd = '/dev/MiSTer_cmd'
+corename = '/tmp/CORENAME'
 
 if args.updaterss:
     for i in range(4):
@@ -59,6 +62,13 @@ if args.updaterss:
     # then draw text over it
     draw.text((x, y), feed, fill=color, font=font)
     image.save('/media/fat/menu.png')
+    
+    # restart the menu if you are still there
+    if 'MENU' in open(corename).read():
+        api=open(mistercmd, 'w')
+        api.write("load_core /media/fat/menu.rbf" + "\n")
+
+    # Exit
     sys.exit()
 
 #enabling this will make it run via init system
