@@ -34,17 +34,18 @@ font = ImageFont.truetype('./Roboto-Regular.ttf', 23)
 color = "black"
 shadowcolor = "white"
 (x, y) = (24, 200)
-#Text wrap settings
-wrapper = textwrap.TextWrapper(width=50, subsequent_indent=' ')
 # init system
 inittab = '/etc/inittab'
-initline = '::sysinit:/media/fat/Scripts/rss -u'
+initline = '::sysinit:/media/fat/Scripts/mistress -u'
 
 if args.updaterss:
-    for i in range(5):
+    for i in range(4):
         date = time.strftime("%b %d", rss.entries[i].published_parsed)
-        xmllint = run(['xmllint', '--html', '--xpath', '//text()', '-'], input = rss.entries[i].summary, stdout=PIPE, universal_newlines=True)
-        summary = wrapper.fill(text=xmllint.stdout)
+        #print(rss.entries[i].summary)
+        xmllint = run(['xmllint', '--html', '--xpath', '//text()', '-'], input = rss.entries[i].summary.replace('<br>', '\n'), stdout=PIPE, universal_newlines=True)
+        #print(xmllint.stdout)
+        summary = '\n'.join(['\n'.join(textwrap.wrap(line, 50, break_long_words=False, replace_whitespace=False, subsequent_indent=' ')) for line in xmllint.stdout.splitlines() if line.strip() != ''])
+        #print(summary)
         feed += rss.entries[i].author + ' @ ' + date + '\n' + summary + '\n\n'
     
     print(feed, end =" ")
