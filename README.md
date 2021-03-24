@@ -19,7 +19,7 @@ Also if you use multiple wallpapers, you lose the ability to go to random wallpa
 
 # Installation
 
-1. Copy mistress into your Scripts directory
+1. Download mistress from the [release page](https://github.com/sigboe/MiSTress/releases/latest) and copy mistress into your Scripts directory on your mister sd card
 2. Rename your wallpaper file from menu.png to wallpaper.png
 3. From the Menu core, run the misterss (found with the scripts), answer yes to install the service. This has to be done each time Linux is updated or else the rss feed wont be updated on your wallpaper.
 
