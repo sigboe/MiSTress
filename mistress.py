@@ -19,7 +19,7 @@ os.chdir(sys._MEIPASS)
 # Dialog
 locale.setlocale(locale.LC_ALL, '')
 d = Dialog(dialog="dialog", autowidgetsize=True)
-d.set_background_title("RSS Wallpaper v0.1")
+d.set_background_title("MiSTress RSS Wallpaper v0.2")
 # Parse command line options (ie. -u)
 parser = argparse.ArgumentParser(description='enable/disable daemon that writes an rss feed to the wallpaper.')
 parser.add_argument('--updaterss', '-u', help='update wallpaper with latest rss', action='store_true')
@@ -40,8 +40,8 @@ color = "black"
 shadowcolor = "white"
 (x, y) = (24, 200)
 # init system
-inittab = '/etc/inittab'
-initline = '::sysinit:/media/fat/Scripts/mistress -u'
+inittab = '/media/fat/linux/user-startup.sh'
+initline = '/media/fat/Scripts/mistress -u'
 # mister api
 mistercmd = '/dev/MiSTer_cmd'
 corename = '/tmp/CORENAME'
@@ -76,13 +76,15 @@ if args.updaterss:
     # Exit
     sys.exit()
 
-#enabling this will make it run via init system
-# https://buildroot.org/downloads/manual/manual.html#_init_system
+#enabling this will make it run via startup script
 
+if ( not os.path.isfile(inittab)):
+    os.close(os.open(inittab, os.O_CREAT))
+
+serviceenabled = False
 with open(inittab) as origin:
     for line in origin:
         if not initline in line:
-            serviceenabled = False
             continue
         try:
             serviceenabled = True
